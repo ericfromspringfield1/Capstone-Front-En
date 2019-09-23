@@ -1,14 +1,35 @@
 import React, { Component } from "react";
 import GigsManager from "../../modules/GigsManager";
 import "./GigsForm.css";
+import VenuesManager from "../../modules/VenuesManager";
+import AudiencesManager from "../../modules/AudiencesManager";
+
 
 class GigsForm extends Component {
   state = {
     gig: "",
     date: "",
-    rating: 0,
+    venues: [],
+    audience: [],
+    spot: [],
     loadingStatus: false
   };
+  
+  componentDidMount() {
+    GigsManager.get(this.props.match.params.id).then(gig => {
+      this.setState({
+        gig: gig.name,
+        date: gig.date,
+        audience: this.state.audience.id,
+        spot: this.state.spot.id
+      });
+      const loggedInUser = parseInt(sessionStorage.getItem("credentials"));
+      VenuesManager.getAll(loggedInUser).then(venues =>
+        this.setState({ venues: venues })
+      );
+    });
+      
+    }
 
   handleFieldChange = evt => {
     const stateToChange = {};
@@ -20,24 +41,22 @@ class GigsForm extends Component {
    */
   constructNewGig = evt => {
     evt.preventDefault();
-    if (
-      this.state.gig === "" ||
-      this.state.date === "" ||
-      this.state.rating === ""
-    ) {
+    if (this.state.gig === "" || this.state.date === "") {
       window.alert("Please input a gig and date");
     } else {
       this.setState({ loadingStatus: true });
       const gig = {
-        gig: this.state.gig,
+        gig: this.state.name,
         date: this.state.date,
-        rating: this.state.rating,
+        venue: this.state.venue,
+        audience: this.state.audience,
         spot: this.state.spot,
-        userId: parseInt(sessionStorage.getItem("credentials")),
-      };
-
-      // Create the gig and redirect user to gig list
+        userId: parseInt(sessionStorage.getItem("credentials"))
+      }
+      
+      
       GigsManager.post(gig).then(() => this.props.history.push("/gigs"));
+      
     }
   };
 
@@ -64,26 +83,22 @@ class GigsForm extends Component {
                 placeholder="Date Of Gig"
               />
               <label htmlFor="date">Date</label>
-
-              <input
-                type="text"
-                required
-                onChange={this.handleFieldChange}
-                id="spot"
-                placeholder="In What Spot Did You Perform"
-              />
-              <label htmlFor="spot">Spot</label>
-
-              <input
-                type="text"
-                required
-                onChange={this.handleFieldChange}
-                id="rating"
-                placeholder="Rate Your Set"
-              />
-              <label htmlFor="rating">Rating</label>
             </div>
-            
+
+            <select
+              className="form-control"
+              id="venueId"
+              value={this.state.venueId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.venues.map(venue => (
+                <option key={venue.id} value={venue.id}>
+                  {venue.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="venue">Venue</label>
+
             <div className="alignRight">
               <button
                 type="button"
@@ -101,3 +116,4 @@ class GigsForm extends Component {
 }
 
 export default GigsForm;
+
