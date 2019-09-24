@@ -4,43 +4,53 @@ import "./GigsForm.css";
 import VenuesManager from "../../modules/VenuesManager";
 import AudiencesManager from "../../modules/AudiencesManager";
 import SpotsManager from "../../modules/SpotsManager";
-import VenuesCard from "../Venues/VenuesCard";
 
 
 class GigsForm extends Component {
-  state = {
-    gigs: "",
+  state = { 
+    gig: "",
     date: "",
     venues: [],
     audiences: [],
     spots: [],
-    loadingStatus: false
+    loadingStatus: false 
   };
-  
-  componentDidMount() {
-    GigsManager.get(this.props.match.params.id).then(gig => {
-      this.setState({
-        gig: gig.name,
-        date: gig.date
-      });
-      const loggedInUserGig = parseInt(sessionStorage.getItem("credentials"));
-      GigsManager.getAll(loggedInUserGig).then(gigs =>
-        this.setState({ gigs: gigs })
-      );
-      const loggedInUserVenue = parseInt(sessionStorage.getItem("credentials"));
-      VenuesManager.getAll(loggedInUserVenue).then(venues =>
-        this.setState({ venues: venues })
+
+  constructNewGig = evt => {
+   evt.preventDefault();
+   
+      this.setState({ loadingStatus: true });
+      const gig = {   
+        name: this.state.name,
+        date: this.state.date,
+        venueId: this.state.venueId,
+        audienceId: this.state.audienceId,
+        spotId: this.state.spotId,
+        userId: parseInt(sessionStorage.getItem("credentials"))
+      }
+      GigsManager.post(gig).then(() => this.props.history.push("/gigs"));
+    }
+    
+  //ComponentDidMount populates the Form with options and text boxes areas so the user can add a Gig
+    componentDidMount() {
+      const loggedInUserVenue = parseInt(sessionStorage.getItem("credentials")); 
+       VenuesManager.getAll(loggedInUserVenue).then(venues =>
+       this.setState({ venues: venues })
+       );
+
+       AudiencesManager.getAll().then(audiences =>
+       this.setState({ audiences: audiences })
+       );
+
+       SpotsManager.getAll().then(spots =>
+        this.setState({ spots: spots })
         );
-        const loggedInUserAudience = parseInt(sessionStorage.getItem("credentials"));
-        AudiencesManager.getAll(loggedInUserAudience).then(audiences =>
-          this.setState({ audiences: audiences })
-          );
-          const loggedInUserSpot = parseInt(sessionStorage.getItem("credentials"));
-          SpotsManager.getAll(loggedInUserSpot).then(spots =>
-            this.setState({ spots: spots })
-            );
-          });
-        }        
+      
+    
+  }
+        
+        
+                
   handleFieldChange = evt => {
     const stateToChange = {};
     stateToChange[evt.target.id] = evt.target.value;
@@ -49,22 +59,6 @@ class GigsForm extends Component {
   
   /*  Local method for validation, set loadingStatus, create gig object, invoke the GigsManager post method, and redirect to the full gig list
   */
- constructNewGig = evt => {
-   evt.preventDefault();
-   
-      this.setState({ loadingStatus: true });
-      const gig = {   
-        name: this.state.name,
-        date: this.state.date,
-        venueId: VenuesManager.get(this.state.venues.id),
-        audienceId: parseInt(sessionStorage.getItem("key")),
-        spotId: parseInt(sessionStorage.getItem("key")),
-        userId: parseInt(sessionStorage.getItem("credentials"))
-      }
-      GigsManager.post(gig).then(() => this.props.history.push("/gigs"));
-
-
-    }
 
   render() {
     return (
@@ -150,5 +144,6 @@ class GigsForm extends Component {
 }
 
 export default GigsForm;
+
 
 
