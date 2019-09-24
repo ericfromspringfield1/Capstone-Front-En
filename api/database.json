@@ -7,103 +7,91 @@
       "id": 1
     },
     {
-      "username": "JoeyGladstone",
-      "email": "joey@cutitout.com",
+      "username": "Bill Cosby",
+      "email": "Cancelled@cancelled.com",
       "password": "123",
       "id": 2
-    },
-    {
-      "username": "BillCosby",
-      "email": "mixologist68@canceled.com",
-      "password": "123",
-      "id": 3
-    },
-    {
-      "username": "Var Render",
-      "email": "var@var.com",
-      "password": "123",
-      "id": 4
     }
   ],
   "gigs": [
     {
-      "gig": "Live From Prison",
-      "date": "2019-09-14",
-      "rating": "7",
-      "userId": 3,
+      "name": "Dead From NSS",
+      "date": "2019-09-09",
+      "venueId": 1,
+      "audienceId": 1,
+      "spotId": 1,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "name": "Guil H",
+      "date": "2019-09-20",
+      "venueId": {},
+      "audienceId": null,
+      "spotId": null,
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "name": "Paul ",
+      "date": "2019-09-21",
+      "audienceId": null,
+      "spotId": null,
+      "userId": 1,
       "id": 3
     },
     {
-      "gig": "Variable Set",
-      "date": "2019-09-04",
-      "id": 4,
-      "userId": 4
-    },
-    {
-      "gig": "Save Kids From Dangerous Stuff Comedy Fest",
-      "date": "2019-09-07",
-      "rating": "9",
-      "userId": 3,
-      "id": 7
-    },
-    {
-      "gig": "Grubb",
-      "date": "2019-09-03",
-      "rating": "6",
-      "userId": 3,
-      "id": 11
-    },
-    {
-      "gig": "HotFries",
-      "date": "2019-09-07",
-      "rating": "9",
-      "spot": "Check",
-      "userId": 3,
-      "id": 12
+      "name": "s",
+      "date": "2019-09-17",
+      "venueId": {},
+      "audienceId": null,
+      "spotId": null,
+      "userId": 1,
+      "id": 4
     }
   ],
   "venues": [
     {
-      "venue": "Ham",
+      "name": "Zanies",
       "city": "Nashville",
-      "state": "310",
-      "userId": 4,
-      "id": 3
+      "state": "TN",
+      "capacity": "3",
+      "userId": 1,
+      "id": 1
     },
     {
-      "venue": "Boston Market",
+      "name": "Third Coast Comedy Club",
       "city": "Nashville",
-      "state": "75",
-      "userId": 3,
+      "state": "TN",
+      "capacity": "100",
+      "userId": 1,
       "id": 5
+    },
+    {
+      "name": "Springfield Cinema",
+      "city": "Springfield",
+      "state": "TN",
+      "capacity": "800",
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "name": "Marvin Gay",
+      "venueId": null,
+      "id": 8
     }
   ],
   "audiences": [
     {
-      "audience": "Sad",
-      "id": 4,
-      "userId": 4
-    },
-    {
-      "audience": "Deaf and Blind",
-      "userId": 3,
-      "id": 5
-    },
-    {
-      "audience": "Fat",
-      "userId": 3,
-      "id": 6
-    },
-    {
-      "audience": "Nubby",
-      "userId": 3,
-      "id": 7
+      "name": "Drunks",
+      "id": 1,
+      "userId": 1
     }
   ],
   "spots": [
     {
-      "spot": "",
-      "id": 0
+      "name": "Headliner",
+      "id": 1
     }
   ]
 }
