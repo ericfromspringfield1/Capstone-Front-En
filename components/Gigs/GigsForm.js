@@ -3,15 +3,17 @@ import GigsManager from "../../modules/GigsManager";
 import "./GigsForm.css";
 import VenuesManager from "../../modules/VenuesManager";
 import AudiencesManager from "../../modules/AudiencesManager";
+import SpotsManager from "../../modules/SpotsManager";
+import VenuesCard from "../Venues/VenuesCard";
 
 
 class GigsForm extends Component {
   state = {
-    gig: "",
+    gigs: "",
     date: "",
     venues: [],
-    audience: [],
-    spot: [],
+    audiences: [],
+    spots: [],
     loadingStatus: false
   };
   
@@ -19,46 +21,50 @@ class GigsForm extends Component {
     GigsManager.get(this.props.match.params.id).then(gig => {
       this.setState({
         gig: gig.name,
-        date: gig.date,
-        audience: this.state.audience.id,
-        spot: this.state.spot.id
+        date: gig.date
       });
-      const loggedInUser = parseInt(sessionStorage.getItem("credentials"));
-      VenuesManager.getAll(loggedInUser).then(venues =>
-        this.setState({ venues: venues })
+      const loggedInUserGig = parseInt(sessionStorage.getItem("credentials"));
+      GigsManager.getAll(loggedInUserGig).then(gigs =>
+        this.setState({ gigs: gigs })
       );
-    });
-      
-    }
-
+      const loggedInUserVenue = parseInt(sessionStorage.getItem("credentials"));
+      VenuesManager.getAll(loggedInUserVenue).then(venues =>
+        this.setState({ venues: venues })
+        );
+        const loggedInUserAudience = parseInt(sessionStorage.getItem("credentials"));
+        AudiencesManager.getAll(loggedInUserAudience).then(audiences =>
+          this.setState({ audiences: audiences })
+          );
+          const loggedInUserSpot = parseInt(sessionStorage.getItem("credentials"));
+          SpotsManager.getAll(loggedInUserSpot).then(spots =>
+            this.setState({ spots: spots })
+            );
+          });
+        }        
   handleFieldChange = evt => {
     const stateToChange = {};
     stateToChange[evt.target.id] = evt.target.value;
     this.setState(stateToChange);
   };
-
+  
   /*  Local method for validation, set loadingStatus, create gig object, invoke the GigsManager post method, and redirect to the full gig list
-   */
-  constructNewGig = evt => {
-    evt.preventDefault();
-    if (this.state.gig === "" || this.state.date === "") {
-      window.alert("Please input a gig and date");
-    } else {
+  */
+ constructNewGig = evt => {
+   evt.preventDefault();
+   
       this.setState({ loadingStatus: true });
-      const gig = {
-        gig: this.state.name,
+      const gig = {   
+        name: this.state.name,
         date: this.state.date,
-        venue: this.state.venue,
-        audience: this.state.audience,
-        spot: this.state.spot,
+        venueId: VenuesManager.get(this.state.venues.id),
+        audienceId: parseInt(sessionStorage.getItem("key")),
+        spotId: parseInt(sessionStorage.getItem("key")),
         userId: parseInt(sessionStorage.getItem("credentials"))
       }
-      
-      
       GigsManager.post(gig).then(() => this.props.history.push("/gigs"));
-      
+
+
     }
-  };
 
   render() {
     return (
@@ -70,7 +76,7 @@ class GigsForm extends Component {
                 type="text"
                 required
                 onChange={this.handleFieldChange}
-                id="gig"
+                id="name"
                 placeholder="Gig"
               />
               <label htmlFor="gig">Gig</label>
@@ -99,6 +105,34 @@ class GigsForm extends Component {
             </select>
             <label htmlFor="venue">Venue</label>
 
+            <select
+              className="form-control"
+              id="audienceId"
+              value={this.state.audienceId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.audiences.map(audience => (
+                <option key={audience.id} value={audience.id}>
+                  {audience.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="audience">Audience Type</label>
+
+            <select
+              className="form-control"
+              id="spotId"
+              value={this.state.spotId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.spots.map(spot => (
+                <option key={spot.id} value={spot.id}>
+                  {spot.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="spot">Spot Order</label>
+
             <div className="alignRight">
               <button
                 type="button"
@@ -116,4 +150,5 @@ class GigsForm extends Component {
 }
 
 export default GigsForm;
+
 
