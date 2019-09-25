@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import GigsManager from "../../modules/GigsManager";
+import VenuesManager from "../../modules/VenuesManager";
+import AudiencesManager from "../../modules/AudiencesManager";
+import SpotsManager from "../../modules/SpotsManager";
 import "./GigsForm.css";
 
 class GigsEditForm extends Component {
   //set the initial state
   state = {
-    gig: "",
+    name: "",
     date: "",
-    rating: 0,
-    loadingStatus: true
+    venues: [],
+    venueId: "",
+    audiences: [],
+    audienceId: "",
+    spots: [],
+    spotId: "",
+    userId: "",
   };
 
   handleFieldChange = evt => {
@@ -16,30 +24,49 @@ class GigsEditForm extends Component {
     stateToChange[evt.target.id] = evt.target.value;
     this.setState(stateToChange);
   };
-
+  
   updateExistingGig = evt => {
     evt.preventDefault();
-    this.setState({ loadingStatus: true });
     const editedGig = {
-      gig: this.state.gig,
+      name: this.state.name,
       date: this.state.date,
-      rating: this.state.rating,
-      id: this.props.match.params.gigId,
-      userId: parseInt(sessionStorage.getItem("credentials")),
+      venueId: parseInt(this.state.venueId),
+      audienceId: parseInt(this.state.audienceId),
+      id: parseInt(this.props.match.params.gigId,),
+      spotId: parseInt(this.state.spotId),
+      userId: parseInt(sessionStorage.getItem("credentials"))
     };
-
+    console.log(editedGig)
     GigsManager.update(editedGig).then(() => this.props.history.push("/gigs"));
+    
   };
+  
+  //NOPE NOPE NOPE NOPE NOT YETComponentDidMount populates the Form with options and text boxes areas so the user can add a Gig
+  //GigsEditForm will set state in ComponentDidMount function for gigs because we need it to populate the Edit Form. We don't get all
+  //because we only need this one gig to populate the form
+
 
   componentDidMount() {
     GigsManager.get(this.props.match.params.gigId).then(gig => {
       this.setState({
-        gig: gig.gig,
+        name: gig.name,
         date: gig.date,
-        rating: gig.rating,
-        loadingStatus: false
+        venueId: parseInt(gig.venueId),
+        audienceId: parseInt(gig.audienceId),
+        spotId: parseInt(gig.spotId),
       });
     });
+
+    const loggedInUserVenue = parseInt(sessionStorage.getItem("credentials"));
+    VenuesManager.getAll(loggedInUserVenue).then(venues =>
+      this.setState({ venues: venues })
+    );
+    
+    AudiencesManager.getAll().then(audiences =>
+      this.setState({ audiences: audiences })
+    );
+    
+    SpotsManager.getAll().then(spots => this.setState({ spots: spots }));
   }
 
   render() {
@@ -49,50 +76,69 @@ class GigsEditForm extends Component {
           <fieldset>
             <div className="formgrid">
               <input
-                type="text"
-                required
                 className="form-control"
+                type="text"
                 onChange={this.handleFieldChange}
-                id="gig"
-                value={this.state.gig}
+                id="name"
+                value={this.state.name}
               />
               <label htmlFor="gig">Gig</label>
 
               <input
                 type="date"
-                required
                 className="form-control"
                 onChange={this.handleFieldChange}
                 id="date"
                 value={this.state.date}
               />
               <label htmlFor="date">Date</label>
-
-              <input
-                type="text"
-                required
-                className="form-control"
-                onChange={this.handleFieldChange}
-                id="spot"
-                value={this.state.spot}
-              />
-              <label htmlFor="spot">Spot</label>
-
-            <input
-              type="text"
-              required
-              className="form-control"
-              onChange={this.handleFieldChange}
-              id="rating"
-              value={this.state.rating}
-              />
-            <label htmlFor="rating">Rating</label>
             </div>
+
+            <select
+              className="form-control"
+              id="venueId"
+              value={this.state.venueId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.venues.map(venue => (
+                <option key={venue.id} value={venue.id}>
+                  {venue.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="venue">Venue</label>
+
+            <select
+              className="form-control"
+              id="audienceId"
+              value={this.state.audienceId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.audiences.map(audience => (
+                <option key={audience.id} value={audience.id}>
+                  {audience.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="audience">Audience Type</label>
+
+            <select
+              className="form-control"
+              id="spotId"
+              value={this.state.spotId}
+              onChange={this.handleFieldChange}
+            >
+              {this.state.spots.map(spot => (
+                <option key={spot.id} value={spot.id}>
+                  {spot.name}
+                </option>
+              ))}
+            </select>
+            <label htmlFor="spot">Spot Order</label>
 
             <div className="alignRight">
               <button
                 type="button"
-                disabled={this.state.loadingStatus}
                 onClick={this.updateExistingGig}
                 className="btn btn-primary"
               >
