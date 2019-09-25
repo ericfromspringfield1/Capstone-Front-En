@@ -5,11 +5,12 @@ import "./VenuesForm.css"
 class VenuesEditForm extends Component {
     //set the initial state
     state = {
-      venue: "",
+      name: "",
       city: "",
       state: "",
       capacity: "",
-      loadingStatus: true,
+      userId: "",
+      loadingStatus: false,
     };
 
     handleFieldChange = evt => {
@@ -22,9 +23,11 @@ class VenuesEditForm extends Component {
       evt.preventDefault()
       this.setState({ loadingStatus: true });
       const editedVenue = {
-        venue: this.state.venue,
-        date: this.state.date,
-        id: this.props.match.params.venueId,
+        name: this.state.name,
+        city: this.state.city,
+        state: this.state.state,
+        capacity: this.state.capacity,
+        id: parseInt(this.props.match.params.venueId),
         userId: parseInt(sessionStorage.getItem("credentials"))
       };
 
@@ -36,15 +39,15 @@ class VenuesEditForm extends Component {
       VenuesManager.get(this.props.match.params.venueId)
       .then(venue => {
           this.setState({
-            venue: venue.venue,
+            name: venue.name,
             city: venue.city,
             state: venue.state,
             capacity: venue.capacity,
-            loadingStatus: false,
+            id: parseInt(venue.venueId),
           });
       });
     }
-
+    
     render() {
       return (
         <>
@@ -56,8 +59,8 @@ class VenuesEditForm extends Component {
                 required
                 className="form-control"
                 onChange={this.handleFieldChange}
-                id="venue"
-                value={this.state.venue}
+                id="name"
+                value={this.state.name}
               />
               <label htmlFor="venue">Venue</label>
 
@@ -77,7 +80,7 @@ class VenuesEditForm extends Component {
                 className="form-control"
                 onChange={this.handleFieldChange}
                 id="state"
-                value={this.state.rating}
+                value={this.state.state}
                 />
               <label htmlFor="state">State</label>
               
@@ -87,9 +90,9 @@ class VenuesEditForm extends Component {
                 className="form-control"
                 onChange={this.handleFieldChange}
                 id="capacity"
-                value={this.state.rating}
+                value={this.state.capacity}
                 />
-              <label htmlFor="capacity">capacity</label>
+              <label htmlFor="capacity">Capacity</label>
             </div> 
 
             <div className="alignRight">
@@ -102,7 +105,7 @@ class VenuesEditForm extends Component {
           </fieldset>
         </form>
         </>
-      );
+      ); 
     }
 }
 
