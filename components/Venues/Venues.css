@@ -1,48 +1,175 @@
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 5px; /* 5px rounded corners */
-    background: aliceblue;
-    margin-bottom: 2em;
-    flex: 0 1 24%;
-  }
+.venuesCard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 31%;
+  margin-left: 10px;
+  /* padding-right: 10pt; */
+  /* display: inline-block; */
+  border-radius: 5px; /* 5px rounded corners */
+  background: rgb(66, 65, 65);
+  margin-bottom: 2em;
+  /* flex: 0 1 24%; */
+  float: left;
   
-  .card-content {
-    padding: .5em;
+}
+
+.card-content { 
+  padding: .5em;
+}
+
+.mrT {
+  display: block;
+  width: 50%;
+  height: auto;
+  margin: 60px auto;
+  border-radius: 50%;
+   -webkit-transition: -webkit-transform .8s ease-in-out;
+           transition:         transform .8s ease-in-out;
+ }
+ 
+ .mrT:hover {
+   -webkit-transform: rotate(720deg);
+           transform: rotate(720deg);
+ }
+ 
+
+/* h3 {
+  margin-top: 0;
+  margin-bottom: .5em;
+  font-weight: bold;
+  color: cornsilk;
+}
+ */
+/* p {
+  font-size: 80%;
+  color: white;
+} */
+
+.venueName1 {
+  color: #000000b2; 
+  background-color: #f5d41aaf;
+  text-align: center;
+  font-size: 30px;; 
+}
+
+.venueCity {
+  color: goldenrod;
+  background-color: #00000060;
+  padding-left: 10px;
+
+} 
+
+.venueState {
+  color: goldenrod;
+  background-color: #00000060;
+  padding-left: 10px;
+}
+
+ .venueCapacity {
+  color: goldenrod;
+  background-color: #00000060;
+  padding-left: 10px;
+
+}
+
+.venueState {
+  color: goldenrod;
+  background-color: #00000060;
+  padding-left: 10px;
+}
+
+.venueCapacity {
+  color: goldenrod;
+  background-color: #00000060;
+  padding-left: 10px;
+}
+
+.addVenue--btn {
+  background-color: rgb(53, 53, 53); 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Patua One', serif;
+  border-radius: 8px;
+}
+
+.addVenue--btn:hover {
+  background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+  color: black;
+  border-radius: 10%;
+  border: solid 1.33pt;
   }
-  
-  .card-content h3 {
-    margin-top: 0;
-    margin-bottom: .5em;
-    font-weight: bold;
-    color: rgb(43, 112, 241);
+
+.venue--btn {
+  background-color: rgb(53, 53, 53); 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Patua One', serif;
+  border-radius: 8px;
+}
+
+.venue--btn:hover {
+  background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+  color: black;
+  border-radius: 10%;
+  border: solid 1.33pt;
   }
-  
-  .card-content p {
-    font-size: 80%;
-    color: darkslategrey;
+
+
+.editVenue--btn {
+  background-color: rgb(53, 53, 53); 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 1px;
+  cursor: pointer;
+  font-family: 'Patua One', serif;
+  border-radius: 8px;
+}
+
+.editVenue--btn:hover {
+  background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+  color: black;
+  border-radius: 10%;
+  border: solid 1.33pt;
   }
-  
-  .content-petname {
-    color: darkslategrey;
+
+.deleteVenue--btn {
+  background-color: rgb(53, 53, 53); 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: 'Patua One', serif;
+  border-radius: 8px;
+}
+
+.deleteVenue--btn:hover {
+  background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+  color: black;
+  border-radius: 10%;
+  border: solid 1.33pt;
   }
-  
-  .card button {
-    background-color: cornflowerblue;
-    border: none;
-    color: cornsilk;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    padding: .5em;
-    border-radius: 2px;
-    margin: .1em;
-    width: 100%;
-  }
-  
-  .card button:hover {
-    background-color: darkblue;
-  }
-  
