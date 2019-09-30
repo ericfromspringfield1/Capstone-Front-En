@@ -8,11 +8,19 @@ button,
 input,
 select,
 textarea {
-    color: #404040;
+    color: black;
     font-family: 'Comfortaa', Arial, sans-serif;
     font-size: 14px;
     line-height: 1.5;
 }
+
+.site-title {
+align-content: space-between;  
+text-align: center;
+background-color: rgb(66, 65, 65);
+font-size: 3.3em;
+}
+
 h1,h2,h3,h4,h5,h6 {
  font-family: 'Patua One', serif;
  letter-spacing: 2px;
@@ -23,26 +31,77 @@ h1,h2,h3,h4,h5,h6 {
 .welcome--btns {
 display: flex;
 justify-content: space-evenly;
-margin-top:50px;
+margin-top: 27;
 }
-p {
- margin-bottom: 1.5em;
- color: #d6fcff;
- color: darkslateblue;
+
+
+.register--btn {
+    background-color: rgb(53, 53, 53); 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: 'Patua One', serif;
+    border-radius: 8px;
 }
+
+.register--btn:hover {
+background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+color: black;
+border-radius: 10%;
+border: solid 1.33pt;
+}
+
+.login--btn {
+    background-color: rgb(53, 53, 53); 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: 'Patua One', serif;
+    border-radius: 8px;
+}
+
+.login--btn:hover {
+    background-image: url("https://images.unsplash.com/photo-1563455586-98caa7512fa8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+    color: black;
+    border-radius: 10%;
+    border: solid 1.33pt;
+    }
+
+
 strong {
  font-weight: bold;
 }
 address {
  margin: 0 0 1.5em;
 }
+
 img {
  display: block;
- border: 0;
- width: 50%;
+ width: 30%;
  height: auto;
- margin:40px auto;
+ margin: 40px auto;
+ border-radius: 50%;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
 }
+
+img:hover {
+  -webkit-transform: rotate(720deg);
+          transform: rotate(720deg);
+}
+
 .section-content {
  padding: 1.4em;
 }
@@ -51,8 +110,7 @@ img {
  flex-wrap: wrap;
  justify-content: space-between;
 }
-/* font-family: 'Faster One', cursive;
-font-family: 'Spicy Rice', cursive;
-font-family: 'Libre Barcode 39 Extended Text', cursive;
-font-family: 'Libre Barcode 39 Text', cursive; */
 
+.footer {
+background-color: rgb(66, 65, 65);
+}
