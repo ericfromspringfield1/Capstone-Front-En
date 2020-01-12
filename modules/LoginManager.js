@@ -1,4 +1,4 @@
-const remoteURL = "http://localhost:8088"
+const remoteURL = "https://standup-jyrny-jyrnyl.on-render.com/api/"
 
 export default {
 
